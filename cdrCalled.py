@@ -58,6 +58,7 @@ while(continueLookup):
 
         if uInput:
             print('\n----  INDIVIDUAL CALLS   ----')
+            print('Timezone: America/Los_Angeles')
             print('dateTime, calling, called')
 
             for call in result.index:
