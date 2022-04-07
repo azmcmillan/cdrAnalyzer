@@ -32,7 +32,7 @@ while(continueLookup):
         result = csvData[csvData['finalCalledPartyNumber'].str.contains(num, regex=True)]
 
         # Strip all columns except the following
-        result = result[['dateTimeOrigination', 'callingPartyNumber', 'finalCalledPartyNumber']]
+        result = result[['dateTimeOrigination', 'callingPartyNumber', 'finalCalledPartyNumber', 'globalCallID_callId', 'duration']]
         result['dateTimeOrigination'] = pd.to_datetime(result['dateTimeOrigination'], unit='s', origin='unix', utc=True)
         result['dateTimeOrigination'] = result['dateTimeOrigination'].dt.tz_convert('America/Los_Angeles')
         totalCallsSum = str(result.shape[0])
@@ -61,13 +61,15 @@ while(continueLookup):
         if uInput:
             print('\n----  INDIVIDUAL CALLS   ----')
             print('Timezone: America/Los_Angeles')
-            print('dateTime, calling, called')
+            print('dateTime, callId, duration, calling, called')
 
             for call in result.index:
                 calling = result['callingPartyNumber'][call]
                 called = result['finalCalledPartyNumber'][call]
                 time = result['dateTimeOrigination'][call]
-                print(str(time) + ', ' + calling + ', ' + called)
+                callId = result['globalCallID_callId'][call]
+                duration = result['duration'][call]
+                print(f'{time}, {callId}, {duration}, {calling}, {called}')
     
     continueLookup = False
     ctLookupInput = input('\n\nWould you like to lookup another number? (y/n) ').lower()
