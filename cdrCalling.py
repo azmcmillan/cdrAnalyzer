@@ -55,6 +55,8 @@ while(continueLookup):
         x = input('\nWould you like to see all calls? (y/n) ').lower()
         if x.startswith('y'): uInput = True
 
+        result = result.sort_values(by='dateTimeOrigination')
+
         if uInput:
             print('\n----  INDIVIDUAL CALLS   ----')
             print('Timezone: America/Los_Angeles')
