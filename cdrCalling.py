@@ -21,11 +21,14 @@ while(continueLookup):
 
     csvFile = "exportData/cdr.csv"
     csvData = pd.read_csv(csvFile, low_memory=False)
+    csvData['callingPartyNumber'] = csvData['callingPartyNumber'].apply(str)
+    csvData['finalCalledPartyNumber'] = csvData['finalCalledPartyNumber'].apply(str)
 
     for num in callNum:
         num = str(num)
         # Search through CSV data for called party number.
-        result = csvData[csvData['callingPartyNumber']==num]
+        #result = csvData[csvData['finalCalledPartyNumber']==num]
+        result = csvData[csvData['finalCalledPartyNumber'].str.contains(num, regex=True)]
 
         # Strip all columns except the following
         result = result[['dateTimeOrigination', 'callingPartyNumber', 'finalCalledPartyNumber']]
