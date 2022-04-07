@@ -33,6 +33,7 @@ while(continueLookup):
         # Strip all columns except the following
         result = result[['dateTimeOrigination', 'callingPartyNumber', 'finalCalledPartyNumber']]
         result['dateTimeOrigination'] = pd.to_datetime(result['dateTimeOrigination'], unit='s', origin='unix')
+        result['dateTimeOrigination'] = result['dateTimeOrigination'].dt.tz_convert('America/Los_Angeles')
         totalCallsSum = str(result.shape[0])
 
         print('\n')
