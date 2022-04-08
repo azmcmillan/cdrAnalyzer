@@ -1,5 +1,4 @@
 import pandas as pd
-from dateutil import tz
 
 print('---------------------\n')
 print('Use this tool to search through exported CDR data from Call Manager.\n')
