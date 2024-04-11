@@ -1,5 +1,5 @@
 # Discard CSV files
-exportData/*.csv
+#exportData/*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
